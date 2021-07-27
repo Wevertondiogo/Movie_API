@@ -1,23 +1,30 @@
-<form class="form">
+<form class="form" [formGroup]="login" (ngSubmit)="onSubmit()">
     <mat-form-field appearance="outline">
         <mat-label>Enter your name</mat-label>
-        <input type="text" matInput>
+        <input type="text" matInput formControlName="name" maxlength="100">
+        <mat-error *ngIf="nameRequired">Name is mandatory.</mat-error>
+        <mat-error *ngIf="errorMinName">Minimum characters is 3.</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
       <mat-label>Enter your email</mat-label>
-      <input matInput placeholder="pat@example.com" type="email">
+      <input matInput placeholder="pat@example.com" type="email" formControlName="email">
+      <mat-error *ngIf="emailRequired">Email is mandatory.</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
         <mat-label>Enter your password</mat-label>
-        <input type="password" matInput>
+        <input type="password" matInput formControlName="password" maxlength="20">
+        <mat-error *ngIf="passwordRequired">Password is mandatory.</mat-error>
+        <mat-error *ngIf="errorMinPassword">Minimum of characters is 6.</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
         <mat-label>Confirm your password</mat-label>
-        <input type="password" matInput >
+        <input type="password" matInput formControlName="confirmPassword" maxlength="20">
+        <mat-error *ngIf="confirmPasswordRequired">Confirm Password is mandatory.</mat-error>
+        <mat-error *ngIf="notPasswordMatch">Not passwords match.</mat-error>
     </mat-form-field>
-    <button type="submit" mat-flat-button color="primary">Send</button>
+    <button type="submit" mat-flat-button color="primary" [disabled]="this.login.invalid">Send</button>
   </form>
   
