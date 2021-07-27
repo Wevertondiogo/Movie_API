@@ -8,7 +8,7 @@ import { Validator } from './Validators/Validator';
   styleUrls: ['./form.component.scss'],
 })
 export class FormComponent implements OnInit {
-  login!: FormGroup;
+  signup!: FormGroup;
   constructor(private _fb: FormBuilder) {}
 
   ngOnInit(): void {
@@ -16,7 +16,7 @@ export class FormComponent implements OnInit {
   }
 
   public createForm(): void {
-    this.login = this._fb.group(
+    this.signup = this._fb.group(
       {
         name: [
           '',
@@ -46,36 +46,36 @@ export class FormComponent implements OnInit {
   }
 
   public onSubmit(): void {
-    console.log(this.login.value);
+    console.log(this.signup.value);
   }
 
   get nameRequired(): boolean {
-    const controller = this.login.get('name');
+    const controller = this.signup.get('name');
     return controller?.errors?.required;
   }
   get errorMinName(): boolean {
-    const controller = this.login.get('name');
+    const controller = this.signup.get('name');
     return (controller?.dirty || controller?.touched) && controller.errors?.minlength;
   }
 
   get emailRequired(): boolean {
-    const controller = this.login.get('email');
+    const controller = this.signup.get('email');
     return controller?.errors?.required;
   }
   get passwordRequired(): boolean {
-    const controller = this.login.get('password');
+    const controller = this.signup.get('password');
     return controller?.errors?.required;
   }
   get errorMinPassword(): boolean {
-    const controller = this.login.get('password');
+    const controller = this.signup.get('password');
     return (controller?.dirty || controller?.touched) && controller.errors?.minlength;
   }
   get confirmPasswordRequired(): boolean {
-    const controller = this.login.get('confirmPassword');
+    const controller = this.signup.get('confirmPassword');
     return controller?.errors?.required;
   }
   get notPasswordMatch(): boolean {
-    const controller = this.login.get('confirmPassword');
+    const controller = this.signup.get('confirmPassword');
     return (controller?.dirty || controller?.touched) && controller?.errors?.notMatch
   }
 }
